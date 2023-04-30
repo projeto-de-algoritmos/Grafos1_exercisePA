@@ -6,98 +6,97 @@ import model.Graph;
 
 public class Encomenda {
 
-	public static List<Integer> encontrarCaminhoMaisCurto(Graph grafo, int inicio, int destino) {
+    public static List<Integer> caminhoMaisCurto(Graph graph, int start, int end) {
+        // Initialize arrays to keep track of visited vertices and their predecessors
+        boolean[] visited = new boolean[graph.getNumVertices()];
+        int[] predecessors = new int[graph.getNumVertices()];
 
-		Queue<Integer> fila = new LinkedList<>();
-		boolean[] visitado = new boolean[grafo.getNumVertices()];
-		int[] predecessores = new int[grafo.getNumVertices()];
+        // Initialize queue for BFS
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(start);
+        visited[start] = true;
+        predecessors[start] = -1;
 
-		Arrays.fill(predecessores, -1);
-		fila.add(inicio);
-		visitado[inicio] = true;
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
 
-		while (!fila.isEmpty()) {
-			int vertice = fila.poll();
-			for (int vizinho : grafo.getAdjacencyList().get(vertice)) {
-				if (!visitado[vizinho]) {
-					visitado[vizinho] = true;
-					predecessores[vizinho] = vertice;
-					fila.add(vizinho);
-					if (vizinho == destino) {
-						return construirCaminho(predecessores, inicio, destino);
-					}
-				}
-			}
-		}
+            // Check if we've reached the end node
+            if (current == end) {
+                return getPath(predecessors, start, end);
+            }
 
-		return null;
-	}
+            // Traverse all adjacent nodes
+            for (int adjacent : graph.getAdjacencyList().get(current)) {
+                if (!visited[adjacent]) {
+                    visited[adjacent] = true;
+                    predecessors[adjacent] = current;
+                    queue.offer(adjacent);
+                }
+            }
+        }
 
-	private static List<Integer> construirCaminho(int[] predecessores, int inicio, int destino) {
-		List<Integer> caminho = new ArrayList<>();
-		int vertice = destino;
-		while (vertice != inicio) {
-			caminho.add(vertice);
-			vertice = predecessores[vertice];
-		}
-		caminho.add(inicio);
-		Collections.reverse(caminho);
-		return caminho;
-	}
+        // No path found
+        return new ArrayList<>();
+    }
 
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
+    public static List<Integer> getPath(int[] predecessors, int start, int end) {
+        List<Integer> path = new ArrayList<>();
 
-		System.out.print("Digite o numero de vertices do grafo: ");
-		int numVertices = scanner.nextInt();
+        // Traverse the predecessors array backwards from the end node to the start node
+        int current = end;
+        while (current != -1) {
+            path.add(current);
+            current = predecessors[current];
+        }
 
-		Graph grafo = new Graph(numVertices);
+        // Reverse the list to get the correct order from start to end
+        Collections.reverse(path);
+        return path;
+    }
 
-		System.out.print("O grafo vai ser direcionado? (S/N) ");
-		boolean isDirecionado = scanner.next().equalsIgnoreCase("S");
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-		while (true) {
-			System.out.println("\nEscolha uma opcao:");
-			System.out.println("1. Adicionar uma aresta");
-			System.out.println("2. Encontrar o caminho mais curto entre dois vértices");
-			System.out.println("3. Imprimir o grafo");
-			System.out.println("4. Sair");
+        System.out.print("Digite o numero de vertices do grafo: ");
+        int numVertices = scanner.nextInt();
 
-			int opcao = scanner.nextInt();
+        Graph grafo = new Graph(numVertices);
 
-			if (opcao == 1) {
-				System.out.print("Digite o primeiro vertice da aresta: ");
-				int v = scanner.nextInt();
-				System.out.print("Digite o segundo vertice da aresta: ");
-				int w = scanner.nextInt();
+        while (true) {
+            System.out.println("\nEscolha uma opcao:");
+            System.out.println("1. Adicionar uma aresta");
+            System.out.println("2. Encontrar o caminho mais curto entre dois vértices");
+            System.out.println("3. Imprimir o grafo");
+            System.out.println("4. Sair");
 
-				if (isDirecionado) {
-					grafo.addDirectedEdge(v, w);
-				} else {
-					grafo.addUndirectedEdge(v, w);
-				}
+            int opcao = scanner.nextInt();
 
-				System.out.println("Aresta adicionada com sucesso.");
-			} else if (opcao == 2) {
-				System.out.print("Digite o vertice de partida: ");
-				int inicio = scanner.nextInt();
-				System.out.print("Digite o vertice de destino: ");
-				int destino = scanner.nextInt();
+            if (opcao == 1) {
+                System.out.print("Vertice1 da aresta: ");
+                int v = scanner.nextInt();
+                System.out.print("Vertice2 da aresta: ");
+                int w = scanner.nextInt();
 
-				List<Integer> caminho = encontrarCaminhoMaisCurto(grafo, inicio, destino);
-				System.out.println("Caminho mais curto: " + caminho);
-			} else if (opcao == 3) {
-				System.out.println("Grafo atual:");
-				grafo.printGraph();
-			} else if (opcao == 4) {
-				System.out.println("Obrigado por usar.");
-				break;
-			} else {
-				System.out.println("Opcao invalida. Tente novamente.");
-			}
-		}
+                grafo.addUndirectedEdge(v, w);
 
-		scanner.close();
-	}
+                System.out.println("Aresta adicionada com sucesso.");
+            } else if (opcao == 2) {
+                System.out.print("Digite o vertice de partida: ");
+                int inicio = scanner.nextInt();
+                System.out.print("Digite o vertice de destino: ");
+                int destino = scanner.nextInt();
 
+                List<Integer> caminho = caminhoMaisCurto(grafo, inicio, destino);
+                System.out.println("Caminho mais curto: " + caminho);
+            } else if (opcao == 3) {
+                grafo.printGraph();
+            } else if (opcao == 4) {
+                break;
+            } else {
+                System.out.println("Opcao invalida. Tente novamente.");
+            }
+        }
+
+        scanner.close();
+    }
 }
