@@ -167,17 +167,21 @@ int main() {
   char s[26], e[26], nome1[26], nome2[26];
   int n, m;
 
+  printf("Informe os nomes das pessoas que você deseja testar a conexão:\n");
   scanf(" %s %s", s, e);
+  printf("Informe a quantidade de pessoas e a quantidade de apertos de mão:\n");
   scanf("%d %d", &n, &m);
   Graph *g = g_iniciar(n);
 
   for(int i = 0; i < n; i++) {
+    printf("Informe o nome da %dº pessoa:\n",i+1);
     scanf(" %s", nome);
     nomes[converter(nome) % lim] = i;
     g -> adj[i] = NEW(i, g -> adj[i]);
   }
 
   for(int i = 0; i < m; i++) {
+    printf("Informe o nome das pessoas que apertaram as mãos:\n");
     scanf(" %s %s", nome1, nome2);
     g_inserir(g, EDGE(nomes[converter(nome1) % lim], nomes[converter(nome2) % lim]));
   }
@@ -187,7 +191,7 @@ int main() {
   fcp(g, nomes[converter(s) % lim], pa, distancia);
 
   int fim = distancia[nomes[converter(e) % lim]];
-  printf("%d\n", fim != __INT_MAX__ ? fim : -1);  
+  printf("Em %d apertos de mãos é possivel conecta-los\n", fim != __INT_MAX__ ? fim : -1);  
 
   return 0;
 }
