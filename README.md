@@ -90,6 +90,37 @@ Distancia: 4
 Baseado no site cses.fi: 
 https://cses.fi/problemset/task/1667/
 
+### Exercício 5 - Apertos de mão
+- Enunciado:
+Baseado na regra dos seis apertos de mão, o intuito é descobrir a quantidade minima de partos de mãos que separam duas pessoas.
+
+- Entradas:
+nomes das duas pessoas que descobriremos a distancia
+dois inteiros com a quantidade de pessoas e a quantidade de apertos de mão
+nomes das pessoas
+nome da pessoa x que apertou a mão da pessoa y
+
+Saída esperada:
+quantidade mínima de apertos de mão para conectar as pessoas
+
+- Caso de teste:
+1. marcos maria
+5 7
+marcos
+marta
+mateus
+marlia
+maria
+marcos mateus
+marta maria
+marcos marlia
+marta marcos
+maria marlia
+marlia marta
+marcos marlia
+
+Saída esperada:
+2
 
 ## Instalação 
 **Linguagem**: java<br>
