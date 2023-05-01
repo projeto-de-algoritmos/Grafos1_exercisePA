@@ -100,7 +100,7 @@ dois inteiros com a quantidade de pessoas e a quantidade de apertos de mão
 nomes das pessoas
 nome da pessoa x que apertou a mão da pessoa y
 
-Saída esperada:
+- Saída esperada:
 quantidade mínima de apertos de mão para conectar as pessoas
 
 - Caso de teste:
@@ -119,7 +119,7 @@ maria marlia
 marlia marta
 marcos marlia
 
-Saída esperada:
+- Saída esperada:
 2
 
 ## Instalação 
