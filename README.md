@@ -85,6 +85,12 @@ Distancia: 5
 3. Grafos com 6 vértices e arestas (0, 1), (1, 2), (2, 3), (3, 4) e (4, 5). Amigo inicial: 0. Amigo final: 4.
 - Saída esperada:
 Distancia: 4
+
+### Exercício 4 - Message Route
+Baseado no site cses.fi: 
+https://cses.fi/problemset/task/1667/
+
+
 ## Instalação 
 **Linguagem**: java<br>
 
