@@ -95,10 +95,10 @@ https://cses.fi/problemset/task/1667/
 Baseado na regra dos seis apertos de mão, o intuito é descobrir a quantidade minima de partos de mãos que separam duas pessoas.
 
 - Entradas:
-nomes das duas pessoas que descobriremos a distancia
-dois inteiros com a quantidade de pessoas e a quantidade de apertos de mão
-nomes das pessoas
-nome da pessoa x que apertou a mão da pessoa y
+1. Nomes das duas pessoas que descobriremos a distancia
+2. Dois inteiros com a quantidade de pessoas e a quantidade de apertos de mão
+3. Nomes das pessoas
+4. Nome da pessoa x e da pessoa y que apertaram as mãos 
 
 - Saída esperada:
 quantidade mínima de apertos de mão para conectar as pessoas
@@ -121,6 +121,10 @@ marcos marlia
 
 - Saída esperada:
 2
+
+## Vídeo
+
+[Vídeo](src/apresentacao/grafos1.mp4)
 
 ## Instalação 
 **Linguagem**: java<br>
